@@ -1,1 +1,16 @@
-program var integer real boolean procedure begin end if then else while do not
+program palavra reservada 
+var palavra reservada 
+integer palavra reservada 
+real palavra reservada 
+boolean palavra reservada 
+procedure palavra reservada 
+begin palavra reservada 
+end palavra reservada 
+if palavra reservada 
+then palavra reservada 
+else palavra reservada 
+while palavra reservada 
+do palavra reservada 
+not palavra reservada 
+and operador multiplicativo 
+or operador aditivo 

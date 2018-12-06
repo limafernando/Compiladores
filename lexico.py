@@ -10,7 +10,10 @@ def main():
     programa = cio.lePrograma()
     print(programa)
 
-    reservadas = cio.lePalavrasReservadas()
+    print('\n')
+
+    mapaReservadas = cio.lePalavrasReservadas()
+    print(mapaReservadas)
 
     #classificaoTokens = automato(programa)
     #cio.salvaTokens(classificaoTokens)

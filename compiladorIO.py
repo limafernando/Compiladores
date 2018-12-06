@@ -19,12 +19,16 @@ def lePalavrasReservadas():
     """
     
     arquivo = open('palavrasReservadas', 'r')
-    conteudoArquivo = arquivo.read()
+    conteudoArquivo = arquivo.readlines()
     arquivo.close()
-    conteudoArquivo = conteudoArquivo.split(' ')
-    conteudoArquivo[-1] = conteudoArquivo[-1][:-1] #para apagar \n do último elemento
 
-    return conteudoArquivo
+    mapaReservadas = {}
+
+    for ele in conteudoArquivo:
+        aux = ele.split(" ")
+        mapaReservadas[aux[0]] = aux[1] + ' ' + aux[2]
+
+    return mapaReservadas
 
 def salvaTokes():
     pass
