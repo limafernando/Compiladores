@@ -8,8 +8,8 @@
 			<initial/>
 		</state>
 		<state id="1" name="q1">
-			<x>95.0</x>
-			<y>339.0</y>
+			<x>97.0</x>
+			<y>282.0</y>
 		</state>
 		<state id="2" name="q2">
 			<x>776.0</x>
@@ -131,47 +131,25 @@
 			<label>operador multiplicativo</label>
 			<final/>
 		</state>
-		<state id="22" name="q22">
-			<x>177.0</x>
-			<y>124.0</y>
-		</state>
-		<state id="23" name="q23">
-			<x>219.0</x>
-			<y>88.0</y>
-		</state>
-		<state id="24" name="q24">
-			<x>265.0</x>
-			<y>49.0</y>
-		</state>
 		<state id="25" name="q25">
-			<x>302.0</x>
-			<y>189.0</y>
+			<x>240.0</x>
+			<y>131.0</y>
 		</state>
 		<!--The list of transitions.-->
 		<transition>
-			<from>15</from>
-			<to>16</to>
-			<read>&gt;</read>
+			<from>0</from>
+			<to>14</to>
+			<read>=</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>7</to>
-			<read>+</read>
-		</transition>
-		<transition>
-			<from>17</from>
-			<to>19</to>
-			<read>=</read>
+			<to>20</to>
+			<read>-</read>
 		</transition>
 		<transition>
 			<from>2</from>
 			<to>2</to>
 			<read>a..Z_0..9</read>
-		</transition>
-		<transition>
-			<from>3</from>
-			<to>13</to>
-			<read>.</read>
 		</transition>
 		<transition>
 			<from>13</from>
@@ -180,8 +158,28 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>11</to>
-			<read>:</read>
+			<to>6</to>
+			<read>;</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>17</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>0</to>
+			<read>}</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>15</to>
+			<read>&lt;</read>
+		</transition>
+		<transition>
+			<from>15</from>
+			<to>16</to>
+			<read>&gt;</read>
 		</transition>
 		<transition>
 			<from>0</from>
@@ -190,53 +188,23 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>6</to>
-			<read>;</read>
+			<to>9</to>
+			<read>(</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>15</to>
-			<read>&lt;</read>
+			<to>7</to>
+			<read>+</read>
 		</transition>
 		<transition>
-			<from>1</from>
-			<to>0</to>
-			<read>}</read>
-		</transition>
-		<transition>
-			<from>25</from>
-			<to>23</to>
-			<read>r</read>
-		</transition>
-		<transition>
-			<from>25</from>
-			<to>22</to>
-			<read>n</read>
-		</transition>
-		<transition>
-			<from>25</from>
-			<to>24</to>
-			<read>t</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>17</to>
-			<read>&gt;</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>3</to>
-			<read>0..9</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>5</to>
+			<from>3</from>
+			<to>13</to>
 			<read>.</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>21</to>
-			<read>/</read>
+			<to>8</to>
+			<read>*</read>
 		</transition>
 		<transition>
 			<from>3</from>
@@ -245,40 +213,13 @@
 		</transition>
 		<transition>
 			<from>0</from>
+			<to>2</to>
+			<read>a..Z</read>
+		</transition>
+		<transition>
+			<from>0</from>
 			<to>0</to>
 			<read>" "</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>14</to>
-			<read>=</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>8</to>
-			<read>*</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>20</to>
-			<read>-</read>
-		</transition>
-		<transition>
-			<from>15</from>
-			<to>18</to>
-			<read>=</read>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>1</to>
-			<controlx>126</controlx>
-			<controly>-7</controly>
-			<read>&amp; - }</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>10</to>
-			<read>)</read>
 		</transition>
 		<transition>
 			<from>11</from>
@@ -287,23 +228,65 @@
 		</transition>
 		<transition>
 			<from>0</from>
+			<to>25</to>
+			<read>\t</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>11</to>
+			<read>:</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>25</to>
+			<read>\r</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>10</to>
+			<read>)</read>
+		</transition>
+		<transition>
+			<from>15</from>
+			<to>18</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>25</to>
+			<read>\n</read>
+		</transition>
+		<transition>
+			<from>17</from>
+			<to>19</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>3</to>
+			<read>0..9</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<controlx>98</controlx>
+			<controly>156</controly>
+			<read>&amp; - }</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>21</to>
+			<read>/</read>
+		</transition>
+		<transition>
+			<from>0</from>
 			<to>4</to>
 			<read>,</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>2</to>
-			<read>a..Z</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>9</to>
-			<read>(</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>25</to>
-			<read>\</read>
+			<to>5</to>
+			<read>.</read>
 		</transition>
 	</automaton>
 </structure>

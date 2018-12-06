@@ -33,6 +33,8 @@ def automato(programa):
 
     indiceParada = -1 #variavel para guardar o proximo indice a ser analisado
 
+    nLinha = 1
+
     #começa uma lista vazia de objetos token
     #faz o loop do automato
     #loop finalizado -> instancia novo objeto token e add na lista de tokens
@@ -46,17 +48,25 @@ def automato(programa):
 
         print('\n')
         
+        print(ele)
         tam = len(ele)
+
+        print('tam ', tam)
         
         for i in range (0, tam): #estado inicial
+            print('aque')
             
             if i <= indiceParada:
-                pass
+                print('i ', i)
+                print(ele[i])
             
             else:
                 print('here')
                 
-                if ele[i] in numeros: #recebeu numero
+                if ele[i] == '\n':
+                    nLinha += 1
+
+                elif ele[i] in numeros: #recebeu numero
                     print('é numero')
                     
                     classificacao = 'inteiro'
@@ -92,7 +102,7 @@ def automato(programa):
                             print('fim de float')
 
                             sIdentificador = ele[i:z]
-                            tkn = token(sIdentificador, classificacao, '1')
+                            tkn = token(sIdentificador, classificacao, str(nLinha))
                             tokens.append(tkn) 
                             
                             break
@@ -101,7 +111,7 @@ def automato(programa):
                             print('fim de inteiro')
 
                             sIdentificador = ele[i:j]
-                            tkn = token(sIdentificador, classificacao, '1')
+                            tkn = token(sIdentificador, classificacao, str(nLinha))
                             tokens.append(tkn)
                             
                             #print(tkn)
@@ -110,6 +120,9 @@ def automato(programa):
 
                 else:
                     pass
+
+        indiceParada = -1 #retorna o valor do proximo indice a ser analisado pro valor inicial de comparação
+
     print('\n')
     
     for t in tokens:
