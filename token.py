@@ -10,5 +10,5 @@ class token:
         self.classificacao = classificacao
         self.nLinha = nLinha
 
-    def getTokenInfo():
+    def getTokenInfo(self):
         return self.sIdentificador + ' ' + self.classificacao + ' ' + self.nLinha
