@@ -28,8 +28,9 @@ def lePalavrasReservadas():
     for ele in conteudoArquivo:
         aux = ele.split(" ")
         mapaReservadas[aux[0]] = aux[1] + ' ' + aux[2]
+        palavrasReservadas = aux[0]
 
-    return mapaReservadas
+    return mapaReservadas, palavrasReservadas
 
 def salvaTokes():
     pass

@@ -1,5 +1,6 @@
 import compiladorIO as cio
 from token import token
+import string
 
 def main():
     """
@@ -12,22 +13,27 @@ def main():
 
     print('\n')
 
-    mapaReservadas = cio.lePalavrasReservadas()
+    mapaReservadas, palavrasReservadas = cio.lePalavrasReservadas()
     print(mapaReservadas)
 
-    automato(programa)
+    automato(programa, mapaReservadas, palavrasReservadas)
 
     #classificaoTokens = automato(programa)
     #cio.salvaTokens(classificaoTokens)
 
-def automato(programa):
+def automato(programa, mapaReservadas, palavrasReservadas):
     """
     Função que representa o autômato
     Retorna lista de classificação de tokens, 
     cada elemento da lista representa um objeto token
     """
 
+    minusculas = list(string.ascii_lowercase)
+    maiusculas = list(string.ascii_uppercase)
     numeros = ['0', '1','2','3','4','5','6','7','8','9'] #para fazer a checagem
+
+    caracteresValidos = minusculas+maiusculas+numeros+['_']
+
     classificacao = '' #variavel para guardar a classifição
     sIdentificador = '' #variavel para guardar a string identificadora
 
@@ -124,7 +130,6 @@ def automato(programa):
                             print('continua inteiro')
                             
                             classificacao = 'inteiro'
-                            indiceParada = j
                             
                         elif ele[j] == '.': #recebeu um ponto -> float
                             print('é float')
@@ -155,6 +160,8 @@ def automato(programa):
 
                         else: #nao recebeu mais numero, sai desse estado e volta pro inicial
                             print('fim de inteiro')
+
+                            indiceParada = j
 
                             sIdentificador = ele[i:j]
                             tkn = token(sIdentificador, classificacao, str(nLinha))
