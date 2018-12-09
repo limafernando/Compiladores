@@ -1,5 +1,6 @@
 import compiladorIO as cio
 from token import token
+from automato import automato
 import string
 
 def main():
@@ -16,10 +17,32 @@ def main():
     mapaReservadas, palavrasReservadas = cio.lePalavrasReservadas()
     print(mapaReservadas)
 
+	
+
     automato(programa, mapaReservadas, palavrasReservadas)
 
     #classificaoTokens = automato(programa)
     #cio.salvaTokens(classificaoTokens)
+
+def criaEstados():
+
+	#estado inicial
+	nome = "estado inicial"
+	transicoes = {}
+	
+	l = ['\n','\t','\r', ' ']
+	transicoes["q0"] = l
+	classificacao = None
+	
+	
+	
+	l = list(string.ascii_lowercase) + list(string.ascii_uppercase)
+	transicoes["palavra"] = l
+	
+	transicoes["operador relacional"] = '>'
+	transicoes["operador relacional"] = '<'
+	
+	
 
 def automato(programa, mapaReservadas, palavrasReservadas):
     """

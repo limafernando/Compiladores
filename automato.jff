@@ -131,20 +131,16 @@
 			<label>operador multiplicativo</label>
 			<final/>
 		</state>
-		<state id="25" name="q25">
-			<x>240.0</x>
-			<y>131.0</y>
-		</state>
 		<!--The list of transitions.-->
 		<transition>
 			<from>0</from>
-			<to>14</to>
-			<read>=</read>
+			<to>6</to>
+			<read>;</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>20</to>
-			<read>-</read>
+			<to>9</to>
+			<read>(</read>
 		</transition>
 		<transition>
 			<from>2</from>
@@ -157,39 +153,19 @@
 			<read>0 .. 9</read>
 		</transition>
 		<transition>
-			<from>0</from>
-			<to>6</to>
-			<read>;</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>17</to>
-			<read>&gt;</read>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>0</to>
-			<read>}</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>15</to>
-			<read>&lt;</read>
-		</transition>
-		<transition>
 			<from>15</from>
 			<to>16</to>
 			<read>&gt;</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>1</to>
-			<read>{</read>
+			<to>0</to>
+			<read>\n</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>9</to>
-			<read>(</read>
+			<to>0</to>
+			<read>\r</read>
 		</transition>
 		<transition>
 			<from>0</from>
@@ -197,14 +173,19 @@
 			<read>+</read>
 		</transition>
 		<transition>
-			<from>3</from>
-			<to>13</to>
-			<read>.</read>
+			<from>0</from>
+			<to>0</to>
+			<read>\t</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>8</to>
-			<read>*</read>
+			<to>21</to>
+			<read>/</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>13</to>
+			<read>.</read>
 		</transition>
 		<transition>
 			<from>3</from>
@@ -213,8 +194,8 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>2</to>
-			<read>a..Z</read>
+			<to>5</to>
+			<read>.</read>
 		</transition>
 		<transition>
 			<from>0</from>
@@ -228,43 +209,38 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>25</to>
-			<read>\t</read>
+			<to>15</to>
+			<read>&lt;</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>11</to>
-			<read>:</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>25</to>
-			<read>\r</read>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>10</to>
-			<read>)</read>
-		</transition>
-		<transition>
-			<from>15</from>
-			<to>18</to>
+			<to>14</to>
 			<read>=</read>
 		</transition>
 		<transition>
-			<from>0</from>
-			<to>25</to>
-			<read>\n</read>
+			<from>1</from>
+			<to>0</to>
+			<read>}</read>
 		</transition>
 		<transition>
-			<from>17</from>
-			<to>19</to>
-			<read>=</read>
+			<from>0</from>
+			<to>4</to>
+			<read>,</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>{</read>
 		</transition>
 		<transition>
 			<from>0</from>
 			<to>3</to>
 			<read>0..9</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>17</to>
+			<read>&gt;</read>
 		</transition>
 		<transition>
 			<from>1</from>
@@ -275,18 +251,38 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>21</to>
-			<read>/</read>
+			<to>2</to>
+			<read>a..Z</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>4</to>
-			<read>,</read>
+			<to>11</to>
+			<read>:</read>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>5</to>
-			<read>.</read>
+			<to>8</to>
+			<read>*</read>
+		</transition>
+		<transition>
+			<from>15</from>
+			<to>18</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>20</to>
+			<read>-</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>10</to>
+			<read>)</read>
+		</transition>
+		<transition>
+			<from>17</from>
+			<to>19</to>
+			<read>=</read>
 		</transition>
 	</automaton>
 </structure>
