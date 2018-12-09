@@ -16,13 +16,13 @@ def main():
 
     mapaReservadas = cio.lePalavrasReservadas()
     print(mapaReservadas)
-    #print(palavrasReservadas)
 
     mapaOperadores = cio.leOperadoes()
     
     classificacaoTokens = automato.exe(programa, mapaReservadas, mapaOperadores)#, palavrasReservadas)
-    
-    cio.salvaTokens(classificacaoTokens)	
- 
+
+    cio.salvaTokens(classificacaoTokens)
+
+
 if __name__ == '__main__':
     main()
