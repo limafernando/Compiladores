@@ -8,4 +8,4 @@ class estado:
     def __init__(self, nome, transicoes, classificacao):
         self.nome = nome
         self.transicoes = transicoes
-		self.classificacao = classificacao
+        self.classificacao = classificacao

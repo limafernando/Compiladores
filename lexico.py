@@ -1,7 +1,16 @@
 import compiladorIO as cio
 from token import token
 from automato import automato
+from estado import estado
 import string
+
+global q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21
+
+
+
+
+
+
 
 def main():
     """
@@ -16,31 +25,207 @@ def main():
 
     mapaReservadas, palavrasReservadas = cio.lePalavrasReservadas()
     print(mapaReservadas)
-
-	
-
+    
+    criaEstados()
+    
     automato(programa, mapaReservadas, palavrasReservadas)
 
     #classificaoTokens = automato(programa)
     #cio.salvaTokens(classificaoTokens)
 
 def criaEstados():
+    global q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21
 
-	#estado inicial
-	nome = "estado inicial"
-	transicoes = {}
+    minusculas = list(string.ascii_lowercase)
+    maiusculas = list(string.ascii_uppercase)
+    numeros = ['0', '1','2','3','4','5','6','7','8','9']
+
+    estados = []
+    
+    nome = ' '
+    transicoes = {}
+    classificacao = ''
+    
+    #estado inicial
+    nome = 'q0'
+    
+    transicoes['q0'] = ['\n','\t','\r', ' ']
+    transicoes['q1'] = ['{']
+    transicoes['q2'] = minusculas + maiusculas
+    transicoes['q3'] = numeros
+    transicoes['q4'] = [',']
+    transicoes['q5'] = ['.']
+    transicoes['q6'] = [';']
+    transicoes['q7'] = ['+']
+    transicoes['q20'] = ['-']
+    transicoes['q8'] = ['*']
+    transicoes['q21'] = ['/']
+    transicoes['q9'] = ['(']
+    transicoes['q10'] = ['+']
+    transicoes['q11'] = [':']
+    transicoes['q17'] = ['>']
+    transicoes['q15'] = ['<']
+    transicoes['q14'] = ['=']
+    
+    classificacao = ''
+    
+    q0 = estado(nome, transicoes, classificacao)
+
+    #comentario
+    nome = 'q1'
+
+    transicoes['q1'] = minusculas + maiusculas + ['_', '\n','\t','\r', ' '] + numeros
+    transicoes['q0'] = ['}']
+    classificacao = ''
+
+    q1 = estado(nome, transicoes, classificacao)
+
+    #palavra
+    nome = 'q2'
+
+    transicoes['q2'] = minusculas + maiusculas + ['_']
+    classificacao = ['palavra reservada','identificador', 'operador multiplicativo', 'operador aditivo']
+
+    q2 = estado(nome, transicoes, classificacao)
+
+    #inteiro
+    nome = 'q3'
+
+    transicoes['q3'] = numeros
+    transicoes['q13'] = ['.']
+    classificacao = 'numero inteiro'
+
+    q3 = estado(nome, transicoes, classificacao)
+
+    #real
+    nome = 'q13'
+
+    transicoes['q13'] = numeros
+    classificacao = 'numero real'
+
+    q13 = estado(nome, transicoes, classificacao)
 	
-	l = ['\n','\t','\r', ' ']
-	transicoes["q0"] = l
-	classificacao = None
+	#simbolos
+
+    nome = 'q4'
+
+    transicoes = {}
+    classificacao = 'delimitador'
+
+    q4 = estado(nome, transicoes, classificacao)
+
+    nome = 'q5'
+
+    transicoes = {}
+    classificacao = 'delimitador'
+
+    q5 = estado(nome, transicoes, classificacao)
+
+    nome = 'q6'
+
+    transicoes = {}
+    classificacao = 'delimitador'
+
+    q6 = estado(nome, transicoes, classificacao)
+
+    nome = 'q7'
+
+    transicoes = {}
+    classificacao = 'operador aditivo'
+
+    q7 = estado(nome, transicoes, classificacao)
+
+    nome = '20'
+
+    transicoes = {}
+    classificacao = 'operador aditivo'
+
+    q20 = estado(nome, transicoes, classificacao)
+
+    nome = 'q8'
+
+    transicoes = {}
+    classificacao = 'operador multiplicativo'
+
+    q8 = estado(nome, transicoes, classificacao)
+
+    nome = 'q21'
+
+    transicoes = {}
+    classificacao = 'operador multiplicativo'
+
+    q21 = estado(nome, transicoes, classificacao)
+
+    nome = 'q9'
+
+    transicoes = {}
+    classificacao = 'delimitador'
+
+    q9 = estado(nome, transicoes, classificacao)
+
+    nome = 'q10'
+
+    transicoes = {}
+    classificacao = 'delimitador'
+
+    q10 = estado(nome, transicoes, classificacao)
+
+    nome = 'q11'
+
+    transicoes['q12'] = ['=']
+    classificacao = 'delimitador'
+
+    q11 = estado(nome, transicoes, classificacao)
+
+    nome = 'q12'
+
+    transicoes = {}
+    classificacao = 'atribuicao'
+
+    q12 = estado(nome, transicoes, classificacao)
 	
-	
-	
-	l = list(string.ascii_lowercase) + list(string.ascii_uppercase)
-	transicoes["palavra"] = l
-	
-	transicoes["operador relacional"] = '>'
-	transicoes["operador relacional"] = '<'
+    nome = 'q17'
+
+    transicoes['q19'] = ['=']
+    classificacao = 'operador relacional'
+
+    q17 = estado(nome, transicoes, classificacao)
+
+    nome = 'q15'
+
+    transicoes['q16'] = ['>']
+    transicoes['q18'] = ['=']
+    classificacao = 'operador relacional'
+
+    q15 = estado(nome, transicoes, classificacao)
+
+    nome = 'q14'
+
+    transicoes = {}
+    classificacao = 'operador relacional'
+
+    q14 = estado(nome, transicoes, classificacao)
+    
+    nome = 'q19'
+
+    transicoes = {}
+    classificacao = 'operador relacional'
+
+    q19 = estado(nome, transicoes, classificacao)
+
+    nome = 'q16'
+
+    transicoes = {}
+    classificacao = 'operador relacional'
+
+    q16 = estado(nome, transicoes, classificacao)
+
+    nome = 'q18'
+
+    transicoes = {}
+    classificacao = 'operador relacional'
+
+    q18 = estado(nome, transicoes, classificacao)
 	
 	
 
@@ -50,6 +235,8 @@ def automato(programa, mapaReservadas, palavrasReservadas):
     Retorna lista de classificação de tokens, 
     cada elemento da lista representa um objeto token
     """
+    global q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21
+    print(q0)
 
     minusculas = list(string.ascii_lowercase)
     maiusculas = list(string.ascii_uppercase)
