@@ -1,0 +1,19 @@
+program palavra reservada 1
+teste identificador 1
+; delimitador 1
+var palavra reservada 5
+valor1 identificador 6
+: delimitador 6
+integer palavra reservada 6
+; delimitador 6
+valor2 identificador 7
+: delimitador 7
+real palavra reservada 7
+; delimitador 7
+begin palavra reservada 8
+valor1 identificador 9
+:= comando atribuição 9
+10 numero inteiro 9
+; delimitador 9
+end palavra reservada 10
+. delimitador 10

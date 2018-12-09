@@ -1,0 +1,17 @@
+; delimitador
+. delimitador
+: delimitador
+( delimitador
+) delimitador
+, delimitador
+:= comando atribuição
+= operador relacional
+< operador relacional
+> operador relacional
+<= operador relacional
+>= operador relacional
+<> operador relacional
++ operador aditivo
+- operador aditivo
+* operador multiplicativo
+/ operador multiplicativo
