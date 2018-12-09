@@ -23,26 +23,56 @@ def main():
 
     #classificaoTokens = automato(programa)
     #cio.salvaTokens(classificaoTokens)
+	
+	
+def execucao(programa, mapaReservada, palavrasReservadas, automato):
 
-def criaEstados():
-
-	#estado inicial
-	nome = "estado inicial"
-	transicoes = {}
+	estadoAtual = q0
+	estadoAnterior = None
+	indiceCaractere = 0
 	
-	l = ['\n','\t','\r', ' ']
-	transicoes["q0"] = l
-	classificacao = None
+	temTransicao = False
+	transicao = {}
 	
-	
-	
-	l = list(string.ascii_lowercase) + list(string.ascii_uppercase)
-	transicoes["palavra"] = l
-	
-	transicoes["operador relacional"] = '>'
-	transicoes["operador relacional"] = '<'
-	
-	
+	dictEstados = {
+		'q0' : q0, 'q1' : q1, 'q2' : q2, 'q3' : q3, 'q4' : q4, 'q5' : q5, 'q6' : q6, 'q7' : q7, 'q8' : q8, 'q9' : q9, 'q10' : q10, 'q11' : q11, 'q12' : q12,
+		'q13' : q13, 'q14' : q14, 'q15' : q15, 'q16' : q16, 'q17' : q17, 'q18' : q18, 'q19' : q19, 'q20' : q20, 'q21' : q21}
+		
+	for linha in programa:
+		
+		while (indiceCaractere < len(linha)):
+		
+			if estadoAtual.nome == automato.estadoInicial:
+				inicio = linha[i]
+		
+			#Percorrer as transições do estado atual
+			for t in estadoAtual.transicoes.keys():
+				#Esse caractere está nessa transicao?
+				if linha[indiceCaractere] in estadoAtual.transicoes[t]:
+					 temTransicao = True
+					 transicao = t
+				
+			if temTransicao:	
+				if estadoAtual in automato.estadosFinais:
+					estadoAnterior = estadoAtual:
+					
+					#Atualiza o estado que essa transicao indica
+					estadoAtual = dictEstados[transicao]
+			else:
+				if estadoAtual in automato.estadosFinais:
+					sIdentificador = linha[inicio:i]
+                    tkn = token(sIdentificador, estadoAtual.classificacao, str(nLinha))
+                    tokens.append(tkn)
+				else:
+					sIdentificador = linha[inicio:i]
+                    tkn = token(sIdentificador, estadoAnterior.classificacao, str(nLinha))
+                    tokens.append(tkn)
+				i -= 1
+				estadoAtual = automato.estadoInicial
+			
+			i += 1
+		
+		contLinha += 1
 
 def automato(programa, mapaReservadas, palavrasReservadas):
     """
