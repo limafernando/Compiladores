@@ -12,7 +12,7 @@ nLinha = 1 #armazena o numero da linha
 classificacao = '' #variavel para guardar a classifição
 sIdentificador = '' #variavel para guardar a string identificadora
 
-indiceParada = -1 #variavel para guardar o proximo indice a ser analisado
+indiceParada = 0 #variavel para guardar o proximo indice a ser analisado
 estaComentado = False
 
 def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
@@ -50,6 +50,7 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
             print('aque')
             print(i)
             print(indiceParada)
+            
             if i < indiceParada: #serve para ignorar os caracteres até o caracter no indiceParada
                 print('i ', i)
                 print(ele[i])
@@ -58,6 +59,7 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
             else:
                 print('here')
                 print('ele[i]: ' + ele[i])
+                
                 if ele[i] == '\n': #pula linha
                     #precisa ser o primeiro if    
                     nLinha += 1
@@ -69,9 +71,18 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
                     if nLinhaAbreComentario == -1:
                         nLinhaAbreComentario = nLinha
                     
-                    pulaLinha = comentario(ele, i, tam)
-                    if pulaLinha:
+                    comentario(ele, i, tam) #chama a funcao comentario, ela altera o valor da variaável estaComentado, se encontrar } -> false, se pular linha sem fechar o comentário -> true
+                    
+                    if estaComentado: #se continua comentado é porque pulou linha sem fechar o comentário
                         break
+                    
+                    '''pulouLinha = comentario(ele, i, tam)
+                    if pulouLinha:
+                        break'''
+
+                elif ele[i] == '/' and ele[i+1] == '/': #comentário de linha
+                    nLinha += 1
+                    break
 
                 elif ele[i] in numeros: #recebeu numero
                     tkn = numero(ele, i, tam)
@@ -101,9 +112,12 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
         if erro:
             break #se tem erro encerra a análise léxica    
 
-        indiceParada = -1 #retorna o valor do proximo indice a ser analisado pro valor inicial de comparação
+        indiceParada = 0 #retorna o valor do proximo indice a ser analisado pro valor inicial de comparação
 
-    if estaComentado:
+    #fim do for do autômato
+
+    if estaComentado: #se a analise foi encerrada e estaComentado -> erro comentário não fechado
+        
         sIdentificador = '{'
         classificacao = 'ERRO: COMENTÁRIO ABERTO NA LINHA ' +str(nLinhaAbreComentario)
         
@@ -126,7 +140,7 @@ def comentario(ele, i, tam):
     print('comentado')
 
     estaComentado = True
-                    
+
     for j in range (i, tam): #estado de loop até encontrar o fecha comentário
         print(ele[j])              
         if ele[j] == '}': #encontrou
@@ -141,16 +155,11 @@ def comentario(ele, i, tam):
             print('pulou linha sem fechar comentario')
                             
             nLinha += 1
-            indiceParada = -1 #reseta a variavel para começar a varrer a proxima linha
-            #break
+            indiceParada = 0 #reseta a variavel para começar a varrer a proxima linha
+            #break                   
 
-        '''elif ele[j] == '': #EOF
-            print('EOF')
-            indiceParada = j
-            break   '''                    
-
-    if estaComentado:
-        return True
+    '''if estaComentado:
+        return True'''
 
 def numero(ele, i, tam):
     global nLinha, numeros, classificacao, indiceParada
@@ -209,11 +218,41 @@ def numero(ele, i, tam):
     return tkn
 
 def letra(ele, i, tam, mapaReservadas):#, palavrasReservadas):
-    global nLinha, caracteresValidos, classificacao, indiceParada
+    global nLinha, caracteresValidos, classificacao, indiceParada, erro
+    tkn = None
 
-    for j in range(i+1, tam):
+    for j in range(i+1, tam): #continua sequencia de caracteres validos(a..Z_0..9)?
         if ele[j] in caracteresValidos:
             pass
+        
+        elif ele[j] == '[': #será array
+            
+            tkn = numero(ele, j, tam)
+            
+            if tkn.classificacao == 'numero inteiro' and ele[indiceParada] == ']':
+                print('fechou array')
+                #print(ele[z])
+                indiceParada += 1 #indiceParada ja foi alterado na chamada de numero, vai ser incrementado em 1
+
+                sIdentificador = ele[i:indiceParada] 
+                classificacao = 'array'
+                tkn = token(sIdentificador, classificacao, str(nLinha))
+                return tkn
+            
+            else:
+                for z in range(indiceParada, tam): #procura o ]
+                    if ele[z] == ']':
+                        indiceParada = z+1
+                
+                erro = True
+                #indiceParada += 1 #indiceParada ja foi alterado na chamada de numero, vai ser incrementado em 1
+                
+                sIdentificador = ele[i:indiceParada] 
+                classificacao = 'ERRO na indexação de array'
+                tkn = token(sIdentificador, classificacao, str(nLinha))
+                return tkn
+
+
         else:
             indiceParada = j
             break
@@ -221,9 +260,9 @@ def letra(ele, i, tam, mapaReservadas):#, palavrasReservadas):
     sIdentificador = ele[i:indiceParada]
 
     try:
-        classificacao = mapaReservadas[sIdentificador]
+        classificacao = mapaReservadas[sIdentificador] #é palavra reservada?
     except:
-        classificacao = 'identificador'
+        classificacao = 'identificador' #se não for palavra reservada
 
     tkn = token(sIdentificador, classificacao, str(nLinha))
 
@@ -268,7 +307,7 @@ def operador(ele, i, tam, mapaOperadores):
             classificado = True
             indiceParada = j+1 #pula o segundo
     
-    if not classificado:
+    if not classificado: #se não foi uma das opcoes de 2 caracteres tratadas acima(:= <= >= <>) será classificado aqui
         sIdentificador = ele[i]
         classificacao = mapaOperadores[ele[i]]
 

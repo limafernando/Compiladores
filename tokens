@@ -1,19 +1,20 @@
 program palavra reservada 1
 teste identificador 1
 ; delimitador 1
-var palavra reservada 2
-valor1 identificador 3
-: delimitador 3
-integer palavra reservada 3
-; delimitador 3
-valor2 identificador 4
+var palavra reservada 3
+valor1 identificador 4
 : delimitador 4
-real palavra reservada 4
+integer palavra reservada 4
 ; delimitador 4
-begin palavra reservada 5
-valor1 identificador 6
-:= comando atribuição 6
-10 numero inteiro 6
-; delimitador 6
-end palavra reservada 7
-. delimitador 7
+valor2 identificador 5
+: delimitador 5
+real palavra reservada 5
+; delimitador 5
+begin palavra reservada 6
+valor1 identificador 8
+:= comando atribuição 8
+10 numero inteiro 8
+; delimitador 8
+array[casa] ERRO na indexação de array 9
+end palavra reservada 10
+. delimitador 10
