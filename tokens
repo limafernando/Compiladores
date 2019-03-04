@@ -17,6 +17,5 @@ valor1 identificador 8
 := comando atribuição 8
 10 numero inteiro 8
 ; delimitador 8
-array[2] array 9
-end palavra reservada 10
-. delimitador 10
+end palavra reservada 9
+. delimitador 9

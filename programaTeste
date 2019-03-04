@@ -6,5 +6,4 @@ var
 begin
 //teste2
 	valor1 := 10;
-	array[2]
 end.

@@ -69,7 +69,7 @@ def lista_declaracoes_variaveis():
         if tokens[indice].sIdentificador == ';':
             indice += 1
 
-            lista_de_identificadores2()
+            lista_declaracoes_variaveis2()
 
         else:
             print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ';'")
@@ -91,7 +91,7 @@ def lista_declaracoes_variaveis2():
             if tokens[indice].sIdentificador == ';':
                 indice += 1
 
-                lista_de_identificadores2()
+                lista_declaracoes_variaveis2()
 
             else:
                 print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ';'")
@@ -129,9 +129,6 @@ def lista_de_identificadores2():
         else:
             print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um identificador após ','")
         
-    else:
-        #print('token:', tokens[indice].getTokenInfo())
-        print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ','")
 
 def tipo():
 
@@ -161,9 +158,6 @@ def declaracoes_de_subprogramas():
 
             declaracoes_de_subprogramas()
 
-        else:
-            print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ';'")
-
 def declaracao_de_subprograma():
 
     global tokens, indice
@@ -185,7 +179,6 @@ def declaracao_de_subprograma():
 
             else:
                 print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ';'")
-                indice += 1
 
         else: 
             print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'procedure'")
@@ -210,9 +203,6 @@ def argumentos():
 
         else:
             print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ')'")
-
-    else:
-        print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador '('")
 
 def lista_de_parametros():
     
@@ -247,9 +237,6 @@ def lista_de_parametros2():
         else:
             print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ':'")
 
-    else:
-        print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ';'")
-
 def comando_composto():
     
     global tokens, indice
@@ -264,9 +251,12 @@ def comando_composto():
         
         else:
             print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'end'")
+        
+        return True
 
     else:
-        print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'begin'")
+        #print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'begin'")
+        return False
 
 def comandos_opcionais():
 
