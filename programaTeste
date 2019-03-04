@@ -1,10 +1,10 @@
 program teste; {programa exemplo}
 //teste
 var
-	valor1: integer;
+	valor1, valor3: integer;
 	valor2: real;
 begin
 //teste2
 	valor1 := 10;
-	array[casa]
+	array[2]
 end.

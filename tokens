@@ -3,6 +3,8 @@ teste identificador 1
 ; delimitador 1
 var palavra reservada 3
 valor1 identificador 4
+, delimitador 4
+valor3 identificador 4
 : delimitador 4
 integer palavra reservada 4
 ; delimitador 4
@@ -15,6 +17,6 @@ valor1 identificador 8
 := comando atribuição 8
 10 numero inteiro 8
 ; delimitador 8
-array[casa] ERRO na indexação de array 9
+array[2] array 9
 end palavra reservada 10
 . delimitador 10

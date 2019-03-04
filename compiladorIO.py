@@ -1,3 +1,5 @@
+from token import token
+
 def lePrograma():
     """
     Função para leitura do programa
@@ -60,3 +62,35 @@ def salvaTokens(classificacaoTokens):
     arquivo = open('tokens', 'w')
     arquivo.writelines(classificacaoTokens)
     arquivo.close()
+
+def leTokens():
+    arquivo = open('tokens', 'r')
+    linhas = arquivo.readlines()
+    arquivo.close()
+
+    tokens = []
+
+    for l in linhas:
+        
+        aux = l.split(' ')
+
+        if len(aux) == 3:
+
+            identificador = aux[0]
+            classificacao = aux[1]
+            nLinha = aux[2]
+            nLinha = nLinha[0:nLinha.find('\n')] #tira o \n
+
+        else:
+
+            identificador = aux[0]
+            classificacao = aux[1]+' '+aux[2]
+            nLinha = aux[3]
+            nLinha = nLinha[0:nLinha.find('\n')] #tira o \n
+
+        #print(nLinha)
+
+        tkn = token(identificador, classificacao, nLinha)
+        tokens.append(tkn)
+
+    return tokens
