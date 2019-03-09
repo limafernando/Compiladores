@@ -343,6 +343,36 @@ def comando():
 
         return True
 
+    ######alteração case
+    elif tokens[indice].sIdentificador == 'case':
+        indice += 1
+
+        seletor()
+
+        if tokens[indice].sIdentificador == 'of':
+            indice += 1
+
+            lista_de_seletor()
+
+            if tokens[indice].sIdentificador == 'else':
+                indice += 1
+                
+                if tokens[indice].sIdentificador == ':':
+                    indice += 1
+
+                    comando()
+
+                else:
+                    print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ':'")
+
+            else:
+                print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'else'")
+
+        else:
+            print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'of'")
+
+        return True
+
     else:
         return False
 
@@ -435,11 +465,14 @@ def expressao_simples():
         expressao_simples2()
 
     else:
+        print(tokens[indice].nLinha)
+        print(tokens[indice].classificacao)
+        print(tokens[indice].sIdentificador)
         print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um termo ou um sinal")
 
 def expressao_simples2():
 
-    global tokesn, indice
+    global tokens, indice
 
     if op_aditivo():
         termo()
@@ -472,11 +505,11 @@ def fator():
 		fator2()
 		return True
 	
-	elif tokens[indice].classificacao == "numero inteiro":
+	elif tokens[indice].classificacao == "integer":
 		indice += 1
 		return True
 	
-	elif tokens[indice].classificacao == "numero real":
+	elif tokens[indice].classificacao == "real":
 		indice += 1
 		return True
 	
@@ -610,6 +643,59 @@ def op_multiplicativo():
 
     else:
         return False
+
+
+######################
+#modificação case
+
+def seletor():
+
+    global tokens, indice
+    
+    if tokens[indice].classificacao == 'integer':
+        indice += 1
+
+    elif tokens[indice].classificacao == 'real':
+        indice += 1
+
+    else:
+        print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um tipo integer ou real")
+
+def lista_de_seletor():
+
+    global tokens, indice
+
+    seletor()
+
+    if tokens[indice].sIdentificador == ':':
+        indice += 1
+
+        comando()
+
+        lista_de_seletor2()
+        
+    else:
+        print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ':'")
+
+    
+
+def lista_de_seletor2():
+
+    global tokens, indice
+
+    if tokens[indice].sIdentificador  == ";":
+        indice += 1
+
+        seletor()
+
+        if tokens[indice].sIdentificador == ":":
+    	    indice += 1
+    
+    	    comando()
+
+        else:
+    	    print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ':'")
+
 
 if __name__ == '__main__':
     main()

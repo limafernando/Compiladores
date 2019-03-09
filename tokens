@@ -1,21 +1,39 @@
 program palavra reservada 1
 teste identificador 1
 ; delimitador 1
-var palavra reservada 3
-valor1 identificador 4
-, delimitador 4
-valor3 identificador 4
+var palavra reservada 2
+valor1 identificador 3
+: delimitador 3
+integer palavra reservada 3
+; delimitador 3
+valor2 identificador 4
 : delimitador 4
-integer palavra reservada 4
+real palavra reservada 4
 ; delimitador 4
-valor2 identificador 5
-: delimitador 5
-real palavra reservada 5
-; delimitador 5
-begin palavra reservada 6
+begin palavra reservada 5
+case palavra reservada 7
+2 integer 7
+of palavra reservada 7
+1 integer 8
+: delimitador 8
 valor1 identificador 8
 := comando atribuição 8
-10 numero inteiro 8
+10 integer 8
 ; delimitador 8
-end palavra reservada 9
-. delimitador 9
+2 integer 9
+: delimitador 9
+valor1 identificador 9
+:= comando atribuição 9
+5 integer 9
+else palavra reservada 10
+: delimitador 10
+valor1 identificador 10
+:= comando atribuição 10
+5 integer 10
+; delimitador 10
+valor1 identificador 13
+:= comando atribuição 13
+10 integer 13
+; delimitador 13
+end palavra reservada 14
+. delimitador 14

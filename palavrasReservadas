@@ -14,3 +14,5 @@ do palavra reservada
 not palavra reservada 
 and operador multiplicativo 
 or operador aditivo 
+case palavra reservada 
+of palavra reservada 

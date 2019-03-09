@@ -165,20 +165,20 @@ def numero(ele, i, tam):
     global nLinha, numeros, classificacao, indiceParada
 
     print('é numero')    
-    classificacao = 'numero inteiro'
+    classificacao = 'integer'
     
     for j in range (i+1, tam): #estado de loop recebendo numeros
                         
         print(ele[j])
         if ele[j] in numeros: #continua recebendo numeros
-            print('continua numero inteiro')
+            print('continua integer')
                             
-            classificacao = 'numero inteiro'
+            classificacao = 'integer'
                             
-        elif ele[j] == '.': #recebeu um ponto -> numero real
-            print('é numero real')
+        elif ele[j] == '.': #recebeu um ponto -> real
+            print('é real')
 
-            classificacao = 'numero real'
+            classificacao = 'real'
                             
             for z in range (j+1, tam):
                 print('tem casa decimal?')
@@ -186,7 +186,7 @@ def numero(ele, i, tam):
                 if ele[z] in numeros:
                     print('casa decimal')
 
-                    classificacao = 'numero real'
+                    classificacao = 'real'
 
                 else:
                     print('acabaram as casas decimais')
@@ -194,7 +194,7 @@ def numero(ele, i, tam):
                     indiceParada = z
                     break
                             
-            print('fim de numero real')
+            print('fim de real')
 
             sIdentificador = ele[i:z]
             tkn = token(sIdentificador, classificacao, str(nLinha))
@@ -203,7 +203,7 @@ def numero(ele, i, tam):
             break
 
         else: #nao recebeu mais numero, sai desse estado e volta pro inicial
-            print('fim de numero inteiro')
+            print('fim de integer')
 
             indiceParada = j
 
@@ -229,7 +229,7 @@ def letra(ele, i, tam, mapaReservadas):#, palavrasReservadas):
             
             tkn = numero(ele, j, tam)
             
-            if tkn.classificacao == 'numero inteiro' and ele[indiceParada] == ']':
+            if tkn.classificacao == 'integer' and ele[indiceParada] == ']':
                 print('fechou array')
                 #print(ele[z])
                 indiceParada += 1 #indiceParada ja foi alterado na chamada de numero, vai ser incrementado em 1
