@@ -1,13 +1,13 @@
 from token import token
 
-def lePrograma():
+def lePrograma(nomeArq):
     """
     Função para leitura do programa
     Retorna lista com o conteúdo do programa, cada elemento da lista
     é uma linha do arquivo
     """
     
-    arquivo = open('programaTeste', 'r')
+    arquivo = open(nomeArq, 'r')
     #arquivo = open('teste', 'r')
     conteudoArquivo = arquivo.readlines()
     arquivo.close()

@@ -1,0 +1,30 @@
+program exemplo;
+	var a, b: integer;
+	
+	procedure p(x:integer);
+		var b, c: integer;
+
+		begin
+			b := x + exemplo;
+		end;
+	
+	procedure q;
+		var c, d: integer;
+
+		procedure r(y:integer);
+			var e, f: integer;
+			
+			begin
+				f := 10;
+				y := 5;
+			end;
+
+		begin
+			
+			c := 10;
+		end;
+
+	begin
+		a := 10;
+
+	end.

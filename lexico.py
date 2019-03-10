@@ -3,13 +3,13 @@ from token import token
 import automato
 import string
 
-def main():
+def main(nomeArq):
     """
     Função principal do analisador léxico
     Controla as chamadas das funções utilizadas pelo analisador
     """
 
-    programa = cio.lePrograma()
+    programa = cio.lePrograma(nomeArq)
     print(programa)
 
     print('\n')
@@ -25,4 +25,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(nomeArq)

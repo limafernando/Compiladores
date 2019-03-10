@@ -1,39 +1,84 @@
 program palavra reservada 1
-teste identificador 1
+exemplo identificador 1
 ; delimitador 1
 var palavra reservada 2
-valor1 identificador 3
-: delimitador 3
-integer palavra reservada 3
-; delimitador 3
-valor2 identificador 4
+a identificador 2
+, delimitador 2
+b identificador 2
+: delimitador 2
+integer palavra reservada 2
+; delimitador 2
+procedure palavra reservada 4
+p identificador 4
+( delimitador 4
+x identificador 4
 : delimitador 4
-real palavra reservada 4
+integer palavra reservada 4
+) delimitador 4
 ; delimitador 4
-begin palavra reservada 5
-case palavra reservada 7
-2 integer 7
-of palavra reservada 7
-1 integer 8
-: delimitador 8
-valor1 identificador 8
+var palavra reservada 5
+b identificador 5
+, delimitador 5
+c identificador 5
+: delimitador 5
+integer palavra reservada 5
+; delimitador 5
+begin palavra reservada 7
+b identificador 8
 := comando atribuição 8
-10 integer 8
+x identificador 8
++ operador aditivo 8
+exemplo identificador 8
 ; delimitador 8
-2 integer 9
-: delimitador 9
-valor1 identificador 9
-:= comando atribuição 9
-5 integer 9
-else palavra reservada 10
-: delimitador 10
-valor1 identificador 10
-:= comando atribuição 10
-5 integer 10
-; delimitador 10
-valor1 identificador 13
-:= comando atribuição 13
-10 integer 13
-; delimitador 13
-end palavra reservada 14
-. delimitador 14
+end palavra reservada 9
+; delimitador 9
+procedure palavra reservada 11
+q identificador 11
+; delimitador 11
+var palavra reservada 12
+c identificador 12
+, delimitador 12
+d identificador 12
+: delimitador 12
+integer palavra reservada 12
+; delimitador 12
+procedure palavra reservada 14
+r identificador 14
+( delimitador 14
+y identificador 14
+: delimitador 14
+integer palavra reservada 14
+) delimitador 14
+; delimitador 14
+var palavra reservada 15
+e identificador 15
+, delimitador 15
+f identificador 15
+: delimitador 15
+integer palavra reservada 15
+; delimitador 15
+begin palavra reservada 17
+f identificador 18
+:= comando atribuição 18
+10 integer 18
+; delimitador 18
+y identificador 19
+:= comando atribuição 19
+5 integer 19
+; delimitador 19
+end palavra reservada 20
+; delimitador 20
+begin palavra reservada 22
+c identificador 24
+:= comando atribuição 24
+10 integer 24
+; delimitador 24
+end palavra reservada 25
+; delimitador 25
+begin palavra reservada 27
+a identificador 28
+:= comando atribuição 28
+10 integer 28
+; delimitador 28
+end palavra reservada 30
+. delimitador 30

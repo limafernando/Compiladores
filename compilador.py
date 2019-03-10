@@ -3,7 +3,9 @@ from sintatico import main as sintatico
 
 def main():
 
-    lexico()
+    nomeArq = 'programaTesteSemantico'
+
+    lexico(nomeArq)
     print()
     sintatico()
 
