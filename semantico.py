@@ -15,7 +15,7 @@ class pilhaEscopo:
         self.pilhaTipos.append('$')
 
     def fechaEscopo(self):
-        for i in pilhaTdS[::-1]:
+        for i in self.pilhaTdS[::-1]:
             
             if i == '$': #remove e para a procura pelo fechamento de escopo
                 self.pilhaTdS.pop()
@@ -30,22 +30,31 @@ class pilhaEscopo:
         self.pilhaTipos.append(tipo)
 
     def procuraSimbolo(self, simbolo): #procura
-        for i in pilhaTdS[::-1]:
+        declarada = False
+        
+        for i in self.pilhaTdS[::-1]:
+
+            #print(i)
             
             if i == simbolo:
-                return True
+                #print('oi')
+                declarada = True
+                break
 
             else:
-                return False
+                #print('nao oi')
+                declarada = False
+
+        return declarada
 
     def declaraSimbolo(self, simbolo): #declaração
-        for i in pilhaTdS[::-1]:
+        for i in self.pilhaTdS[::-1]:
             
             if i == simbolo:
-                return False #simbolo já declarado
+                return True #simbolo já declarado
 
             elif i == '$':
-                return True #simbolo ainda não declarado no escopo
+                return False #simbolo ainda não declarado no escopo
 
     def getPilhaTdS(self):
         return self.pilhaTdS
