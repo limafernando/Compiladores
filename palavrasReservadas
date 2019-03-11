@@ -16,3 +16,5 @@ and operador multiplicativo
 or operador aditivo 
 case palavra reservada 
 of palavra reservada 
+true palavra reservada 
+false palavra reservada 

@@ -25,8 +25,11 @@ class pilhaEscopo:
             self.pilhaTdS.pop() #vai removendo até achar o $
             self.pilhaTipos.pop() #vai removendo até achar o $
 
-    def inserePilha(self, simbolo, tipo): #inserção
+    def inserePilhaTdS(self, simbolo): #inserção
         self.pilhaTdS.append(simbolo)
+        
+        
+    def inserePilhaTipos(self, tipo): #inserção
         self.pilhaTipos.append(tipo)
 
     def procuraSimbolo(self, simbolo): #procura

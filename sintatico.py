@@ -1,22 +1,22 @@
 from compiladorIO import leTokens
 from semantico import pilhaEscopo
 
-global tokens, indice, pilhaEscopo, contador
+global tokens, indice, pilhaEscopo, contadorIdentificadores
 
 def main():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     tokens = leTokens()
     indice = 0
     pilhaEscopo = pilhaEscopo()
-    contador = 0
+    contadorIdentificadores = 0
 
     programa()
 
 def programa():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == 'program':
         indice += 1
@@ -24,10 +24,13 @@ def programa():
         pilhaEscopo.abreEscopo()
         print('abrindo escopo')
         print(pilhaEscopo.getPilhaTdS())
+        print(pilhaEscopo.getPilhaTipos())
         
         if tokens[indice].classificacao == 'identificador':
-            pilhaEscopo.inserePilha(tokens[indice].sIdentificador, 'program')
+            pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
+            pilhaEscopo.inserePilhaTipos('program')
             print(pilhaEscopo.getPilhaTdS())
+            print(pilhaEscopo.getPilhaTipos())
             
             indice += 1
 
@@ -59,7 +62,7 @@ def programa():
 
 def declaracao_de_variaveis():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == 'var':
         indice += 1
@@ -71,7 +74,9 @@ def declaracao_de_variaveis():
 
 def lista_declaracoes_variaveis():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
+
+    contadorIdentificadores = 0
 
     lista_de_identificadores()
 
@@ -79,6 +84,8 @@ def lista_declaracoes_variaveis():
         indice += 1
 
         tipo()
+
+        print(pilhaEscopo.getPilhaTipos())
 
         if tokens[indice].sIdentificador == ';':
             indice += 1
@@ -93,7 +100,9 @@ def lista_declaracoes_variaveis():
 
 def lista_declaracoes_variaveis2():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
+
+    contadorIdentificadores = 0
 
     if(lista_de_identificadores()):
 
@@ -101,6 +110,8 @@ def lista_declaracoes_variaveis2():
             indice += 1
 
             tipo()
+
+            print(pilhaEscopo.getPilhaTipos())
 
             if tokens[indice].sIdentificador == ';':
                 indice += 1
@@ -115,7 +126,7 @@ def lista_declaracoes_variaveis2():
 
 def lista_de_identificadores():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].classificacao == 'identificador':
         
@@ -126,8 +137,14 @@ def lista_de_identificadores():
             print(tokens[indice].nLinha + ': ERRO! Semântica inválida. Variável declarada duas vezes no mesmo escopo!')
         
         else:
-            pilhaEscopo.inserePilha(tokens[indice].sIdentificador, 'ainda não sei como fazer')
+            pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
+            #pilhaEscopo.inserePilhaTipos('ainda não sei como fazer')
             print(pilhaEscopo.getPilhaTdS())
+            #print(pilhaEscopo.getPilhaTipos())
+
+            contadorIdentificadores += 1
+
+            
 
         indice += 1
 
@@ -140,7 +157,7 @@ def lista_de_identificadores():
 
 def lista_de_identificadores2():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
     
     lista_de_identificadores()
 
@@ -155,8 +172,12 @@ def lista_de_identificadores2():
                 print(tokens[indice].nLinha + ': ERRO! Semântica inválida. Variável declarada duas vezes no mesmo escopo!')
             
             else:
-                pilhaEscopo.inserePilha(tokens[indice].sIdentificador, 'ainda não sei como fazer')
+                pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
+                #pilhaEscopo.inserePilhaTipos('ainda não sei como fazer')
                 print(pilhaEscopo.getPilhaTdS())
+                #print(pilhaEscopo.getPilhaTipos())
+                
+                contadorIdentificadores += 1
 
             indice += 1
             lista_de_identificadores2()
@@ -167,15 +188,27 @@ def lista_de_identificadores2():
 
 def tipo():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == 'integer':
+        
+        for i in range(contadorIdentificadores): #insere o tipo das variáveis declaradas
+            pilhaEscopo.inserePilhaTipos('integer')
+        
         indice += 1
 
     elif tokens[indice].sIdentificador == 'real':
+        
+        for i in range(contadorIdentificadores): #insere o tipo das variáveis declaradas
+            pilhaEscopo.inserePilhaTipos('real')
+
         indice += 1
 
     elif tokens[indice].sIdentificador == 'boolean':
+        
+        for i in range(contadorIdentificadores): #insere o tipo das variáveis declaradas
+            pilhaEscopo.inserePilhaTipos('boolean')
+
         indice += 1
 
     else:
@@ -184,7 +217,7 @@ def tipo():
 #####################################
 def declaracoes_de_subprogramas():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if(declaracao_de_subprograma()):
 
@@ -195,7 +228,7 @@ def declaracoes_de_subprogramas():
 
 def declaracao_de_subprograma():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == 'procedure':
         indice += 1
@@ -208,11 +241,14 @@ def declaracao_de_subprograma():
                 print(tokens[indice].nLinha + ': ERRO! Semântica inválida. Subprograma declarado duas vezes no mesmo escopo!')
             
             else:
-                pilhaEscopo.inserePilha(tokens[indice].sIdentificador, 'ainda não sei como fazer')
+                pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
+                pilhaEscopo.inserePilhaTipos('procedure')
                 print(pilhaEscopo.getPilhaTdS())
+                print(pilhaEscopo.getPilhaTipos())
                 pilhaEscopo.abreEscopo()
                 print('abrindo escopo')
                 print(pilhaEscopo.getPilhaTdS())
+                print(pilhaEscopo.getPilhaTipos())
 
             indice += 1
 
@@ -239,7 +275,7 @@ def declaracao_de_subprograma():
 
 def argumentos():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == '(':
         indice += 1
@@ -254,7 +290,7 @@ def argumentos():
 
 def lista_de_parametros():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     lista_de_identificadores()
 
@@ -269,7 +305,7 @@ def lista_de_parametros():
 
 def lista_de_parametros2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == ';':
         indice += 1
@@ -287,7 +323,7 @@ def lista_de_parametros2():
 
 def comando_composto():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == 'begin':
         indice += 1
@@ -298,6 +334,7 @@ def comando_composto():
             pilhaEscopo.fechaEscopo()
             print('fechando escopo')
             print(pilhaEscopo.getPilhaTdS())
+            print(pilhaEscopo.getPilhaTipos())
             indice += 1
         
         else:
@@ -311,20 +348,20 @@ def comando_composto():
 
 def comandos_opcionais():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     lista_de_comandos()
 
 def lista_de_comandos():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if (comando()):
         lista_de_comandos2()
 
 def lista_de_comandos2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == ';':
         indice += 1
@@ -335,7 +372,7 @@ def lista_de_comandos2():
 
 def comando():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     aux = False
 
@@ -429,7 +466,7 @@ def comando():
 
 def parte_else():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == 'else':
         indice += 1
@@ -437,7 +474,7 @@ def parte_else():
 
 def variavel():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].classificacao == 'identificador':
         jaDeclarado = pilhaEscopo.procuraSimbolo(tokens[indice].sIdentificador)
@@ -453,7 +490,7 @@ def variavel():
 
 def ativacao_de_procedimento():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].classificacao == 'identificador':
         indice += 1
@@ -467,7 +504,7 @@ def ativacao_de_procedimento():
 
 def ativacao_de_procedimento2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == '(':
         indice += 1
@@ -482,14 +519,14 @@ def ativacao_de_procedimento2():
 
 def lista_de_expressoes():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     expressao()
     lista_de_expressoes2()
 
 def lista_de_expressoes2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == ',':
         indice += 1
@@ -499,21 +536,21 @@ def lista_de_expressoes2():
 
 def expressao():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     expressao_simples()
     expressao2()
 
 def expressao2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if(op_relacional()):
         expressao_simples()
 
 def expressao_simples():
     
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if termo():
         expressao_simples2()
@@ -522,14 +559,11 @@ def expressao_simples():
         expressao_simples2()
 
     else:
-        print(tokens[indice].nLinha)
-        print(tokens[indice].classificacao)
-        print(tokens[indice].sIdentificador)
         print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um termo ou um sinal")
 
 def expressao_simples2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if op_aditivo():
         termo()
@@ -537,7 +571,7 @@ def expressao_simples2():
 
 def termo():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if fator():
         termo2()
@@ -547,7 +581,7 @@ def termo():
 
 def termo2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if op_multiplicativo():
         fator()
@@ -555,7 +589,7 @@ def termo2():
 
 def fator():
 
-	global tokens, indice, pilhaEscopo, contador
+	global tokens, indice, pilhaEscopo, contadorIdentificadores
 	
 	if tokens[indice].classificacao == "identificador":
 		indice += 1
@@ -603,7 +637,7 @@ def fator():
 		
 def fator2():
 
-	global tokens, indice, pilhaEscopo, contador
+	global tokens, indice, pilhaEscopo, contadorIdentificadores
 	
 	if tokens[indice].sIdentificador == "(":
 		indice += 1
@@ -618,7 +652,7 @@ def fator2():
 
 def sinal():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == '+':
         indice += 1
@@ -633,7 +667,7 @@ def sinal():
 
 def op_relacional():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == '=':
         indice += 1
@@ -665,7 +699,7 @@ def op_relacional():
 
 def op_aditivo():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == '+':
         indice += 1
@@ -684,7 +718,7 @@ def op_aditivo():
 
 def op_multiplicativo():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador == '*':
         indice += 1
@@ -707,7 +741,7 @@ def op_multiplicativo():
 
 def seletor():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
     
     if tokens[indice].classificacao == 'integer':
         indice += 1
@@ -720,7 +754,7 @@ def seletor():
 
 def lista_de_seletor():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     seletor()
 
@@ -738,7 +772,7 @@ def lista_de_seletor():
 
 def lista_de_seletor2():
 
-    global tokens, indice, pilhaEscopo, contador
+    global tokens, indice, pilhaEscopo, contadorIdentificadores
 
     if tokens[indice].sIdentificador  == ";":
         indice += 1
