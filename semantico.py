@@ -66,6 +66,9 @@ class pilhaEscopo:
     def getPilhaTipos(self):
         return self.pilhaTipos
 
+    def getPilhaPcT(self):
+        return self.pilhaPcT
+
 ###################
 
     def pushPcT(self, ident, tipo): #Adiciona o tipo utilizado na pilha de tipos para as operações			
@@ -115,7 +118,7 @@ class pilhaEscopo:
         
         else:
             
-            exit("SEMANTICO ERROR: Incopatibilidade de tipos")
+            print("SEMANTICO ERROR: Incopatibilidade de tipos")
             
             
         print("Pilha de tipos atualizadas: ")
@@ -126,5 +129,6 @@ class pilhaEscopo:
         for i in self.pilhaTdS[::-1]:
             
             if i == ident:
-                tipo = self.pilhaPcT[self.pilhaEscopo.index(i)]
+                indice = self.pilhaTdS.index(i)
+                tipo = self.pilhaTipos[indice]
                 return tipo
