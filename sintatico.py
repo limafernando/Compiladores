@@ -22,6 +22,8 @@ def programa():
 		indice += 1
 
 		pilhaEscopo.abreEscopo()
+
+		#print de acompanhamento de programa
 		#print('abrindo escopo')
 		#print(pilhaEscopo.getPilhaTdS())
 		#print(pilhaEscopo.getPilhaTipos())
@@ -29,6 +31,8 @@ def programa():
 		if tokens[indice].classificacao == 'identificador':
 			pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
 			pilhaEscopo.inserePilhaTipos('program')
+			
+			#print de acompanhamento de programa
 			#print(pilhaEscopo.getPilhaTdS())
 			#print(pilhaEscopo.getPilhaTipos())
 			
@@ -46,8 +50,10 @@ def programa():
 					print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador '.'")
 
 				else:
-					print('final:', pilhaEscopo.getPilhaTdS())
+					#print de acompanhamento de programa
+					#print('final:', pilhaEscopo.getPilhaTdS())
 					#print(pilhaEscopo.getPilhaTipos())
+					pass
 
 			else:
 				print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado o delimitador ';'")
@@ -85,6 +91,7 @@ def lista_declaracoes_variaveis():
 
 		tipo()
 
+		#print de acompanhamento de programa
 		#print(pilhaEscopo.getPilhaTipos())
 
 		if tokens[indice].sIdentificador == ';':
@@ -111,7 +118,8 @@ def lista_declaracoes_variaveis2():
 
 			tipo()
 
-			print(pilhaEscopo.getPilhaTipos())
+			#print de acompanhamento de programa
+			#print(pilhaEscopo.getPilhaTipos())
 
 			if tokens[indice].sIdentificador == ';':
 				indice += 1
@@ -133,14 +141,17 @@ def lista_de_identificadores():
 		jaDeclarado = pilhaEscopo.declaraSimbolo(tokens[indice].sIdentificador)
 
 		if jaDeclarado:
+			#print de acompanhamento de programa
 			#print(tokens[indice].sIdentificador)
 			print(tokens[indice].nLinha + ': ERRO! Semântica inválida. Variável declarada duas vezes no mesmo escopo!')
 		
 		else:
 			pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
+
+			#print de acompanhamento de programa
 			#pilhaEscopo.inserePilhaTipos('ainda não sei como fazer')
 			#print(pilhaEscopo.getPilhaTdS())
-			##print(pilhaEscopo.getPilhaTipos())
+			#print(pilhaEscopo.getPilhaTipos())
 
 			contadorIdentificadores += 1
 
@@ -168,14 +179,18 @@ def lista_de_identificadores2():
 			jaDeclarado = pilhaEscopo.declaraSimbolo(tokens[indice].sIdentificador)
 
 			if jaDeclarado:
+				#print de acompanhamento de programa
 				#print(tokens[indice].sIdentificador)
+
 				print(tokens[indice].nLinha + ': ERRO! Semântica inválida. Variável declarada duas vezes no mesmo escopo!')
 			
 			else:
 				pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
+
+				#print de acompanhamento de programa
 				#pilhaEscopo.inserePilhaTipos('ainda não sei como fazer')
 				#print(pilhaEscopo.getPilhaTdS())
-				##print(pilhaEscopo.getPilhaTipos())
+				#print(pilhaEscopo.getPilhaTipos())
 				
 				contadorIdentificadores += 1
 
@@ -237,16 +252,21 @@ def declaracao_de_subprograma():
 			jaDeclarado = pilhaEscopo.declaraSimbolo(tokens[indice].sIdentificador)
 
 			if jaDeclarado:
+				#print de acompanhamento de programa
 				#print(tokens[indice].sIdentificador)
 				print(tokens[indice].nLinha + ': ERRO! Semântica inválida. Subprograma declarado duas vezes no mesmo escopo!')
 			
 			else:
 				pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
 				pilhaEscopo.inserePilhaTipos('procedure')
-				
+
+				#print de acompanhamento de programa
 				#print(pilhaEscopo.getPilhaTdS())
 				#print(pilhaEscopo.getPilhaTipos())
+
 				pilhaEscopo.abreEscopo()
+
+				#print de acompanhamento de programa
 				#print('abrindo escopo')
 				#print(pilhaEscopo.getPilhaTdS())
 				#print(pilhaEscopo.getPilhaTipos())
@@ -333,9 +353,12 @@ def comando_composto():
 
 		if tokens[indice].sIdentificador == 'end':
 			pilhaEscopo.fechaEscopo()
+
+			#print de acompanhamento de programa
 			#print('fechando escopo')
 			#print(pilhaEscopo.getPilhaTdS())
 			#print(pilhaEscopo.getPilhaTipos())
+
 			indice += 1
 		
 		else:
@@ -483,9 +506,12 @@ def variavel():
 
 	if tokens[indice].classificacao == 'identificador':
 		jaDeclarado = pilhaEscopo.procuraSimbolo(tokens[indice].sIdentificador)
-		print(pilhaEscopo.getPilhaTdS())
-		print(tokens[indice].sIdentificador)
-		print(jaDeclarado)
+		
+		#print de acompanhamento de programa
+		#print(pilhaEscopo.getPilhaTdS())
+		#print(tokens[indice].sIdentificador)
+		#print(jaDeclarado)
+		
 		if jaDeclarado:
 			var = tokens[indice].sIdentificador
 			
@@ -619,20 +645,26 @@ def fator():
 		
 		if jaDeclarado:
 			pilhaEscopo.pushPcT(tokens[indice].sIdentificador, 'variavel', tokens[indice].nLinha)
-			print('pilha', pilhaEscopo.getPilhaPcT())
+			
+			#print de acompanhamento de programa
+			#print('pilha', pilhaEscopo.getPilhaPcT())
 			
 			indice += 1
 			fator2()
 
 		else:
-			print("SEMANTICO ERROR: Variável não declarada")
+			print(tokens[indice].nLinha + ": ERRO! Semantica inválida. Variável não declarada")
+			
+			#indice += 1 #tem que incrementar se não gera exceção
 		
 		return True
 	
 	elif tokens[indice].classificacao == "integer":
 		
 		pilhaEscopo.pushPcT(tokens[indice].sIdentificador, 'inteiro', tokens[indice].nLinha)
-		print('pilha', pilhaEscopo.getPilhaPcT())
+		
+		#print de acompanhamento de programa
+		#print('pilha', pilhaEscopo.getPilhaPcT())
 			
 		indice += 1
 		fator2()
@@ -642,7 +674,9 @@ def fator():
 	elif tokens[indice].classificacao == "real":
 		
 		pilhaEscopo.pushPcT(tokens[indice].sIdentificador, 'real', tokens[indice].nLinha)
-		print('pilha', pilhaEscopo.getPilhaPcT())
+		
+		#print de acompanhamento de programa
+		#print('pilha', pilhaEscopo.getPilhaPcT())
 			
 		indice += 1
 		fator2()
@@ -652,7 +686,9 @@ def fator():
 	elif tokens[indice].sIdentificador == "true":
 		
 		pilhaEscopo.pushPcT(tokens[indice].sIdentificador, 'logico', tokens[indice].nLinha)
-		print('pilha', pilhaEscopo.getPilhaPcT())
+		
+		#print de acompanhamento de programa
+		#print('pilha', pilhaEscopo.getPilhaPcT())
 			
 		indice += 1
 		fator2()
@@ -662,7 +698,9 @@ def fator():
 	elif tokens[indice].sIdentificador == "false":
 		
 		pilhaEscopo.pushPcT(tokens[indice].sIdentificador, 'logico', tokens[indice].nLinha)
-		print('pilha', pilhaEscopo.getPilhaPcT())
+		
+		#print de acompanhamento de programa
+		#print('pilha', pilhaEscopo.getPilhaPcT())
 			
 		indice += 1
 		fator2()

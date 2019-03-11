@@ -82,8 +82,9 @@ class pilhaEscopo:
         else:
             self.pilhaPcT.append(tipo)
         
-        print("Pilha tipo: ")
-        print(self.pilhaPcT)
+        #print de acompanhamento de programa
+        #print("Pilha tipo: ")
+        #print(self.pilhaPcT)
         
         if len(self.pilhaPcT) == 2:
             self.atualizaPcT(linha)	
@@ -118,11 +119,11 @@ class pilhaEscopo:
         
         else:
             
-            print(linha, ": SEMANTICO ERRO Incopatibilidade de tipos")
+            print(linha + ": ERRO! Semantica inválida. Incopatibilidade de tipos")
             
-            
-        print("Pilha de tipos atualizadas: ")
-        print(self.pilhaPcT)
+        #print de acompanhamento de programa   
+        #print("Pilha de tipos atualizadas: ")
+        #print(self.pilhaPcT)
 
     def tipoIdentificador(self, ident): #Retorna o tipo de um identificador da tabela de identificadores
         indice = 0
@@ -141,41 +142,51 @@ class pilhaEscopo:
         
         #Para a atribuição ser compatível o tipo da variável utilizada deve ser igual ao topo da pilha
         
-        print('aq',self.tipoIdentificador(var))
-        print(self.pilhaPcT[0])
+        #print de acompanhamento de programa
+        #print('aq',self.tipoIdentificador(var))
+        #print(self.pilhaPcT[0])
         
         if self.tipoIdentificador(var) == self.pilhaPcT[0]:
-            print("Atribuição compatível")
+            #print de acompanhamento de programa
+            #print("Atribuição compatível")
+            pass
                 
         else:
-           print(linha, ": SEMANTICO ERROR Incompatibilidade de tipos na atribuição")
+           print(linha + ": ERRO! Semantica inválida. Incompatibilidade de tipos na atribuição")
 
     #Verifica se os tipos utilizados em um operador são os aceitos
     def tipoOperador(self, op, linha):
 
-        print(op)
-        print(self.pilhaPcT[0])
+        #print de acompanhamento de programa
+        #print(op)
+        #print(self.pilhaPcT[0])
 
         if op == "+" or op == "-" or op == "*" or op == "/":
             
             if self.pilhaPcT[0] == "inteiro" or self.pilhaPcT[0] == "real":
-                print("Operação está sendo realizada com os tipos aceitos")
+                #print de acompanhamento de programa
+                #print("Operação está sendo realizada com os tipos aceitos")
+                pass
             else:
-                print(linha, ": SEMANTICO ERROR O operador não suporta os tipos utilizados")
+                print(linha + ": ERRO! Semantica inválida. O operador não suporta os tipos utilizados")
                 
         elif op == "=" or op == ">" or op == "<" or op == ">=" or op == "<=" or op == "<>":
             
             if self.pilhaPcT[0] == "inteiro" or self.pilhaPcT[0] == "real":
-                print("Operação está sendo realizada com os tipos aceitos")
+                #print de acompanhamento de programa
+                #print("Operação está sendo realizada com os tipos aceitos")
+                pass
             else:
-                print(linha, ": SEMANTICO ERROR O operador não suporta os tipos utilizados")
+                print(linha + ": ERRO! Semantica inválida. O operador não suporta os tipos utilizados")
                 
         elif op == "and" or op == "or":
             
             if self.pilhaPcT[0] == "logico":
-                print("Operação está sendo realizada com os tipos aceitos")
+                #print de acompanhamento de programa
+                #print("Operação está sendo realizada com os tipos aceitos")
+                pass
             else:
-                print(linha, ": SEMANTICO ERROR O operador não suporta os tipos utilizados")
+                print(linha + ": ERRO! Semantica inválida. O operador não suporta os tipos utilizados")
 
     #Limpa a pilha dos tipos quando é terminada uma avaliação
     def limpaPilhaPcT(self):

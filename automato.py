@@ -38,27 +38,31 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
 
 
     for ele in programa: #percorre todo o programa linha por linha
-
-        print('\n')
+        #print de acompanhamento de programa
+        #print('\n')
+        #print(ele)
         
-        print(ele)
         tam = len(ele)
 
-        print('tam ', tam)
+        #print de acompanhamento de programa
+        #print('tam ', tam)
         
         for i in range(0, tam): #estado inicial
-            print('aque')
-            print(i)
-            print(indiceParada)
+            #print de acompanhamento de programa
+            #print('aque')
+            #print(i)
+            #print(indiceParada)
             
             if i < indiceParada: #serve para ignorar os caracteres até o caracter no indiceParada
-                print('i ', i)
-                print(ele[i])
-                #pass
+                #print de acompanhamento de programa
+                #print('i ', i)
+                #print(ele[i])
+                pass
             
             else:
-                print('here')
-                print('ele[i]: ' + ele[i])
+                #print de acompanhamento de programa
+                #print('here')
+                #print('ele[i]: ' + ele[i])
                 
                 if ele[i] == '\n': #pula linha
                     #precisa ser o primeiro if    
@@ -89,12 +93,14 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
                     tokens.append(tkn)
 
                 elif ele[i] in letras: #recebeu letra [a..Z]
-                    print('letras')
+                    #print de acompanhamento de programa
+                    #print('letras')
                     tkn = letra(ele, i, tam, mapaReservadas)#, palavrasReservadas)
                     tokens.append(tkn)
 
                 elif ele[i] in list(mapaOperadores.keys()):
-                    print('operadores')
+                    #print de acompanhamento de programa
+                    #print('operadores')
                     tkn = operador(ele, i, tam, mapaOperadores)
                     tokens.append(tkn)
 
@@ -125,11 +131,13 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
         tokens.append(tkn)
         erro = True #se tem erro encerra a análise léxica
 
-    print('\n')
+    #print de acompanhamento de programa
+    #print('\n')
 
     classificacaoTokens = []
     for t in tokens:
-        print(t.getTokenInfo())
+        #print de acompanhamento de programa
+        #print(t.getTokenInfo())
         classificacaoTokens.append(t.getTokenInfo() + '\n')
 
     return classificacaoTokens
@@ -137,14 +145,17 @@ def exe(programa, mapaReservadas, mapaOperadores):#, palavrasReservadas):
 def comentario(ele, i, tam):
     global nLinha, estaComentado, indiceParada
     
-    print('comentado')
+    #print de acompanhamento de programa
+    #print('comentado')
 
     estaComentado = True
 
     for j in range (i, tam): #estado de loop até encontrar o fecha comentário
-        print(ele[j])              
+        #print de acompanhamento de programa
+        #print(ele[j])              
         if ele[j] == '}': #encontrou
-            print('fechou comentario')
+            #print de acompanhamento de programa
+            #print('fechou comentario')
                            
             indiceParada = j+1
             estaComentado = False
@@ -152,7 +163,8 @@ def comentario(ele, i, tam):
             break
 
         elif ele[j] == '\n': #pula linha no comentário
-            print('pulou linha sem fechar comentario')
+            #print de acompanhamento de programa
+            #print('pulou linha sem fechar comentario')
                             
             nLinha += 1
             indiceParada = 0 #reseta a variavel para começar a varrer a proxima linha
@@ -164,37 +176,47 @@ def comentario(ele, i, tam):
 def numero(ele, i, tam):
     global nLinha, numeros, classificacao, indiceParada
 
-    print('é numero')    
+    #print de acompanhamento de programa
+    #print('é numero')    
+    
     classificacao = 'integer'
     
     for j in range (i+1, tam): #estado de loop recebendo numeros
-                        
-        print(ele[j])
+
+        #print de acompanhamento de programa               
+        #print(ele[j])
+
         if ele[j] in numeros: #continua recebendo numeros
-            print('continua integer')
+            #print de acompanhamento de programa
+            #print('continua integer')
                             
             classificacao = 'integer'
                             
         elif ele[j] == '.': #recebeu um ponto -> real
-            print('é real')
+            #print de acompanhamento de programa
+            #print('é real')
 
             classificacao = 'real'
                             
             for z in range (j+1, tam):
-                print('tem casa decimal?')
+                #print de acompanhamento de programa
+                #print('tem casa decimal?')
 
                 if ele[z] in numeros:
-                    print('casa decimal')
+                    #print de acompanhamento de programa
+                    #print('casa decimal')
 
                     classificacao = 'real'
 
                 else:
-                    print('acabaram as casas decimais')
+                    #print de acompanhamento de programa
+                    #print('acabaram as casas decimais')
                                     
                     indiceParada = z
                     break
-                            
-            print('fim de real')
+            
+            #print de acompanhamento de programa               
+            #print('fim de real')
 
             sIdentificador = ele[i:z]
             tkn = token(sIdentificador, classificacao, str(nLinha))
@@ -203,7 +225,8 @@ def numero(ele, i, tam):
             break
 
         else: #nao recebeu mais numero, sai desse estado e volta pro inicial
-            print('fim de integer')
+            #print de acompanhamento de programa
+            #print('fim de integer')
 
             indiceParada = j
 
@@ -230,7 +253,8 @@ def letra(ele, i, tam, mapaReservadas):#, palavrasReservadas):
             tkn = numero(ele, j, tam)
             
             if tkn.classificacao == 'integer' and ele[indiceParada] == ']':
-                print('fechou array')
+                #print de acompanhamento de programa
+                #print('fechou array')
                 #print(ele[z])
                 indiceParada += 1 #indiceParada ja foi alterado na chamada de numero, vai ser incrementado em 1
 
@@ -283,7 +307,8 @@ def operador(ele, i, tam, mapaOperadores):
             indiceParada = j+1 #pula o segundo
     
     elif ele[i] == '<':
-        print('menor que')
+        #print de acompanhamento de programa
+        #print('menor que')
         if ele[j] == '=':
             op = ele[i]+ele[j]
             sIdentificador = op
@@ -292,7 +317,8 @@ def operador(ele, i, tam, mapaOperadores):
             indiceParada = j+1 #pula o segundo
         
         elif ele[j] == '>':
-            print('diferente')
+            #print de acompanhamento de programa
+            #print('diferente')
             op = ele[i]+ele[j]
             sIdentificador = op
             classificacao = mapaOperadores[op]

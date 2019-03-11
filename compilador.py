@@ -6,7 +6,10 @@ def main():
     nomeArq = 'programaTesteSemantico'
 
     lexico(nomeArq)
-    print()
+    
+    #print de acompanhamento de programa
+    #print()
+    
     sintatico()
 
 if __name__ == "__main__":

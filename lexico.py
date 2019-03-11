@@ -10,12 +10,16 @@ def main(nomeArq):
     """
 
     programa = cio.lePrograma(nomeArq)
-    print(programa)
+    
+    #print de acompanhamento de programa
+    #print(programa)
 
-    print('\n')
+    #print de acompanhamento de programa
+    #print('\n')
 
     mapaReservadas = cio.lePalavrasReservadas()
-    print(mapaReservadas)
+    #print de acompanhamento de programa
+    #print(mapaReservadas)
 
     mapaOperadores = cio.leOperadoes()
     

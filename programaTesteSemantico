@@ -5,7 +5,7 @@ program exemplo;
 		var b, c: integer;
 
 		begin
-			b := x + p;
+			b := x + exemplo;
 		end;
 	
 	procedure q;
