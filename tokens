@@ -28,7 +28,7 @@ b identificador 8
 := comando atribuição 8
 x identificador 8
 + operador aditivo 8
-1 integer 8
+p identificador 8
 ; delimitador 8
 end palavra reservada 9
 ; delimitador 9

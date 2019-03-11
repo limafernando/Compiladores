@@ -71,7 +71,7 @@ class pilhaEscopo:
 
 ###################
 
-    def pushPcT(self, ident, tipo): #Adiciona o tipo utilizado na pilha de tipos para as operações			
+    def pushPcT(self, ident, tipo, linha): #Adiciona o tipo utilizado na pilha de tipos para as operações			
         
         if tipo == "variavel":
 	
@@ -86,9 +86,9 @@ class pilhaEscopo:
         print(self.pilhaPcT)
         
         if len(self.pilhaPcT) == 2:
-            self.atualizaPcT()	
+            self.atualizaPcT(linha)	
 
-    def atualizaPcT(self): #Faz a operação de tipos
+    def atualizaPcT(self, linha): #Faz a operação de tipos
         
         if self.pilhaPcT[0] == "inteiro" and self.pilhaPcT[1] == "inteiro":
             self.pilhaPcT.pop()
@@ -118,7 +118,7 @@ class pilhaEscopo:
         
         else:
             
-            print("SEMANTICO ERROR: Incopatibilidade de tipos")
+            print(linha, ": SEMANTICO ERRO Incopatibilidade de tipos")
             
             
         print("Pilha de tipos atualizadas: ")
@@ -137,7 +137,7 @@ class pilhaEscopo:
         
         return tipo
 
-    def atribuicao(self, var): #Verifica se a atribuição segue as regras da linguagem
+    def atribuicao(self, var, linha): #Verifica se a atribuição segue as regras da linguagem
         
         #Para a atribuição ser compatível o tipo da variável utilizada deve ser igual ao topo da pilha
         
@@ -148,10 +148,10 @@ class pilhaEscopo:
             print("Atribuição compatível")
                 
         else:
-           print("0, SEMANTICO ERROR: Incompatibilidade de tipos na atribuição")
+           print(linha, ": SEMANTICO ERROR Incompatibilidade de tipos na atribuição")
 
     #Verifica se os tipos utilizados em um operador são os aceitos
-    def tipoOperador(self, op):
+    def tipoOperador(self, op, linha):
 
         print(op)
         print(self.pilhaPcT[0])
@@ -161,21 +161,21 @@ class pilhaEscopo:
             if self.pilhaPcT[0] == "inteiro" or self.pilhaPcT[0] == "real":
                 print("Operação está sendo realizada com os tipos aceitos")
             else:
-                print("1, SEMANTICO ERROR: O operador não suporta os tipos utilizados")
+                print(linha, ": SEMANTICO ERROR O operador não suporta os tipos utilizados")
                 
         elif op == "=" or op == ">" or op == "<" or op == ">=" or op == "<=" or op == "<>":
             
             if self.pilhaPcT[0] == "inteiro" or self.pilhaPcT[0] == "real":
                 print("Operação está sendo realizada com os tipos aceitos")
             else:
-                print("2, SEMANTICO ERROR: O operador não suporta os tipos utilizados")
+                print(linha, ": SEMANTICO ERROR O operador não suporta os tipos utilizados")
                 
         elif op == "and" or op == "or":
             
             if self.pilhaPcT[0] == "logico":
                 print("Operação está sendo realizada com os tipos aceitos")
             else:
-                print("3, SEMANTICO ERROR: O operador não suporta os tipos utilizados")
+                print(linha, ": SEMANTICO ERROR O operador não suporta os tipos utilizados")
 
     #Limpa a pilha dos tipos quando é terminada uma avaliação
     def limpaPilhaPcT(self):
