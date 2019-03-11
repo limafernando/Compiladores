@@ -10,7 +10,7 @@ def main():
     tokens = leTokens()
     indice = 0
     pilhaEscopo = pilhaEscopo()
-    contadorIdentificadores = 0
+    contadorIdentificadores = 0 #para saber quantos identificadores foram declarados com um tipo
 
     programa()
 

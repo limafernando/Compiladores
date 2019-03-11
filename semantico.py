@@ -7,6 +7,7 @@ class pilhaEscopo:
     def __init__(self): #definição, pilha vazia
         self.pilhaTdS = []
         self.pilhaTipos = []
+        self.pilhaPcT = []
 
 
 
@@ -64,3 +65,66 @@ class pilhaEscopo:
 
     def getPilhaTipos(self):
         return self.pilhaTipos
+
+###################
+
+    def pushPcT(self, ident, tipo): #Adiciona o tipo utilizado na pilha de tipos para as operações			
+        
+        if tipo == "variavel":
+	
+            aux = self.tipoIdentificador(ident)
+            
+            self.pilhaPcT.append(aux)
+
+        else:
+            self.pilhaPcT.append(tipo)
+        
+        print("Pilha tipo: ")
+        print(self.pilhaPcT)
+        
+        if len(self.pilhaPcT) == 2:
+            self.atualizaPcT()	
+
+    def atualizaPcT(self): #Faz a operação de tipos
+        
+        if self.pilhaPcT[0] == "inteiro" and self.pilhaPcT[1] == "inteiro":
+            self.pilhaPcT.pop()
+            self.pilhaPcT.pop()
+            self.pilhaPcT.append("inteiro")
+        
+        elif self.pilhaPcT[0] == "real" and self.pilhaPcT[1] == "real":
+            self.pilhaPcT.pop()
+            self.pilhaPcT.pop()
+            self.pilhaPcT.append("real")
+        
+        elif self.pilhaPcT[0] == "inteiro" and self.pilhaPcT[1] == "real":
+            self.pilhaPcT.pop()
+            self.pilhaPcT.pop()
+            self.pilhaPcT.append("real")
+        
+        elif self.pilhaPcT[0] == "real" and self.pilhaPcT[1] == "inteiro":
+            self.pilhaPcT.pop()
+            self.pilhaPcT.pop()
+            self.pilhaPcT.append("real")
+        
+        elif self.pilhaPcT[0] == "logico" and self.pilhaPcT[1] == "logico":
+            
+            self.pilhaPcT.pop()
+            self.pilhaPcT.pop()
+            self.pilhaPcT.append("logico")
+        
+        else:
+            
+            exit("SEMANTICO ERROR: Incopatibilidade de tipos")
+            
+            
+        print("Pilha de tipos atualizadas: ")
+        print(self.pilhaPcT)
+
+    def tipoIdentificador(self, ident): #Retorna o tipo de um identificador da tabela de identificadores
+        
+        for i in self.pilhaTdS[::-1]:
+            
+            if i == ident:
+                tipo = self.pilhaPcT[self.pilhaEscopo.index(i)]
+                return tipo
