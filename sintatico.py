@@ -53,6 +53,8 @@ def programa():
 					#print de acompanhamento de programa
 					#print('final:', pilhaEscopo.getPilhaTdS())
 					#print(pilhaEscopo.getPilhaTipos())
+					
+					#print("Compilado com sucesso!")
 					pass
 
 			else:
@@ -206,6 +208,8 @@ def tipo():
 	global tokens, indice, pilhaEscopo, contadorIdentificadores, var, operador
 
 	if tokens[indice].sIdentificador == 'integer':
+
+		#print(contadorIdentificadores)
 		
 		for i in range(contadorIdentificadores): #insere o tipo das variáveis declaradas
 			pilhaEscopo.inserePilhaTipos('inteiro')
@@ -222,7 +226,7 @@ def tipo():
 	elif tokens[indice].sIdentificador == 'boolean':
 		
 		for i in range(contadorIdentificadores): #insere o tipo das variáveis declaradas
-			pilhaEscopo.inserePilhaTipos('boolean')
+			pilhaEscopo.inserePilhaTipos('logico')
 
 		indice += 1
 
@@ -284,12 +288,84 @@ def declaracao_de_subprograma():
 
 			else:
 				print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ';'")
-
+		
 		else: 
 			print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'procedure'")
 		
 		return True
 
+	elif tokens[indice].sIdentificador == 'function':
+		indice += 1
+
+		if tokens[indice].classificacao == 'identificador':
+
+			nomeFuncao = tokens[indice].sIdentificador
+
+			jaDeclarado = pilhaEscopo.declaraSimbolo(tokens[indice].sIdentificador)
+
+			if jaDeclarado:
+				#print de acompanhamento de programa
+				#print(tokens[indice].sIdentificador)
+				print(tokens[indice].nLinha + ': ERRO! Semântica inválida. Function declarada duas vezes no mesmo escopo!')
+			
+			else:
+				pilhaEscopo.inserePilhaTdS(tokens[indice].sIdentificador)
+				pilhaEscopo.inserePilhaTipos('function')
+
+				#print de acompanhamento de programa
+				#print(pilhaEscopo.getPilhaTdS())
+				#print(pilhaEscopo.getPilhaTipos())
+
+				pilhaEscopo.abreEscopo()
+
+				#print de acompanhamento de programa
+				#print('abrindo escopo')
+				#print(pilhaEscopo.getPilhaTdS())
+				#print(pilhaEscopo.getPilhaTipos())
+
+			indice += 1
+
+			argumentos()
+
+			if tokens[indice].sIdentificador == ':':
+				indice += 1
+
+				if tokens[indice].sIdentificador == 'integer':
+					aux = 'inteiro'
+				elif tokens[indice].sIdentificador == 'real':
+					aux = 'real'
+				elif tokens[indice].sIdentificador == 'boolean':
+					aux = 'logico'
+
+				pilhaEscopo.pushFunctions(nomeFuncao, aux)
+				
+				pilhaEscopo.pushPcT(tokens[indice].sIdentificador, aux, tokens[indice].nLinha)
+				
+				#print de acompanhamento de programa
+				#print('abrindo escopo')
+				#print(pilhaEscopo.getPilhaTdS())
+				#print(pilhaEscopo.getPilhaTipos())
+				#print(pilhaEscopo.getPilhaPcT())
+
+				indice += 1
+
+				if tokens[indice].sIdentificador == ';':
+					indice += 1
+					
+					comando_composto()
+
+				else:
+					#print('aqui')
+					print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ';'")
+
+			else:
+				print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ':'")
+		
+		else: 
+			print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado a palavra reservada 'procedure'")
+		
+		return True
+	
 	else: 
 		#print(tokens[indice].nLinha + ": ERRO! Sintax inválida. Era esperado um delimitador ';'")
 		return False
@@ -401,6 +477,7 @@ def comando():
 	aux = False
 
 	if(variavel()):
+		pilhaEscopo.limpaPilhaPcT()
 		
 		if tokens[indice].sIdentificador == ':=':
 			linha = tokens[indice].nLinha

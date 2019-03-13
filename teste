@@ -1,1 +1,13 @@
-ident[1.2]
+program teste;
+var c:integer; x:boolean;
+
+function soma(a,b:integer):integer;
+begin
+	soma := a+b;
+end;
+
+begin 
+	c := soma(4,8);
+    if (x and c) 
+    then c := 2;
+end.

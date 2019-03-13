@@ -8,6 +8,7 @@ class pilhaEscopo:
         self.pilhaTdS = []
         self.pilhaTipos = []
         self.pilhaPcT = []
+        self.functions = {}
 
 
 
@@ -69,15 +70,33 @@ class pilhaEscopo:
     def getPilhaPcT(self):
         return self.pilhaPcT
 
+    def pushFunctions(self, nome, tipoRetorno):
+        self.functions[nome] = tipoRetorno
+
 ###################
 
     def pushPcT(self, ident, tipo, linha): #Adiciona o tipo utilizado na pilha de tipos para as operações			
         
+        #print('indentificador', ident)
+        #print('tipo', tipo)
+        #print('linha', linha)
+
+        #print('aqui', ident, self.tipoIdentificador(ident))
+        
         if tipo == "variavel":
+
+            if self.tipoIdentificador(ident) == "function":
+                #print('AQUIII function')
+
+                aux = self.functions[ident]
+                self.pilhaPcT.append(aux)
+
+                #print(tipo)
+            else:
 	
-            aux = self.tipoIdentificador(ident)
+                aux = self.tipoIdentificador(ident)
             
-            self.pilhaPcT.append(aux)
+                self.pilhaPcT.append(aux)
 
         else:
             self.pilhaPcT.append(tipo)
@@ -85,6 +104,7 @@ class pilhaEscopo:
         #print de acompanhamento de programa
         #print("Pilha tipo: ")
         #print(self.pilhaPcT)
+        #print(self.pilhaTipos)
         
         if len(self.pilhaPcT) == 2:
             self.atualizaPcT(linha)	
@@ -105,6 +125,7 @@ class pilhaEscopo:
             self.pilhaPcT.pop()
             self.pilhaPcT.pop()
             self.pilhaPcT.append("real")
+            print('oi')
         
         elif self.pilhaPcT[0] == "real" and self.pilhaPcT[1] == "inteiro":
             self.pilhaPcT.pop()
@@ -116,9 +137,15 @@ class pilhaEscopo:
             self.pilhaPcT.pop()
             self.pilhaPcT.pop()
             self.pilhaPcT.append("logico")
+
+        elif self.pilhaPcT[0] == "function" or self.pilhaPcT[1] == "function":
+            #print(linha + ' tem function')
+            self.pilhaPcT.pop()
+            self.pilhaPcT.pop()
+            self.pilhaPcT.append('inteiro')
         
         else:
-            
+            #print(self.pilhaPcT[0], self.pilhaPcT[1])
             print(linha + ": ERRO! Semantica inválida. Incopatibilidade de tipos")
             
         #print de acompanhamento de programa   
@@ -145,10 +172,21 @@ class pilhaEscopo:
         #print de acompanhamento de programa
         #print('aq',self.tipoIdentificador(var))
         #print(self.pilhaPcT[0])
+
+        #print(var)
+
+        #print(var, self.tipoIdentificador(var), self.pilhaPcT[0])
+
+        '''if self.tipoIdentificador(var) != self.pilhaPcT[0] and self.pilhaPcT[0] == 'logico':
+            self.pilhaPcT[0] = self.tipoIdentificador(var)'''        
         
         if self.tipoIdentificador(var) == self.pilhaPcT[0]:
             #print de acompanhamento de programa
             #print("Atribuição compatível")
+            pass
+
+        elif self.tipoIdentificador(var) == 'function':
+            #print('aqui')
             pass
                 
         else:
